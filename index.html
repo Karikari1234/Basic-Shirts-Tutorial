@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Shirts Ltd System - User Manual</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-circle {
+            background-color: white;
+            color: #d32f2f;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn:hover, .language-btn.active {
+            background: white;
+            color: #d32f2f;
+        }
+        
+        /* Introduction */
+        .intro {
+            background-color: #ffebee;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Workflow Steps */
+        .workflow {
+            padding: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            border-left: 5px solid #d32f2f;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            background-color: #d32f2f;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .url {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        /* Role Sections */
+        .role-section {
+            background-color: #d32f2f;
+            color: white;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* Feature Box */
+        .feature-box {
+            background-color: #fff9f9;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-box h4 {
+            color: #d32f2f;
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Sub-steps */
+        .sub-steps {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sub-step {
+            flex: 1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .sub-step:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Replan Note */
+        .replan-note {
+            background-color: #ffebee;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            color: #d32f2f;
+            border: 1px dashed #d32f2f;
+        }
+        
+        .replan-note h4 {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Tooltip Styles */
+        .tooltip {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #f5f5f5;
+            color: #666;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .tooltip:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .tooltip-content {
+            position: absolute;
+            right: 40px;
+            top: 0;
+            width: 250px;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .tooltip:hover .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+            right: 30px;
+        }
+        
+        /* Progress Path */
+        .progress-path {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #ffebee;
+            z-index: 0;
+        }
+        
+        /* Bangla Language Style */
+        .bn {
+            display: none;
+            font-family: 'SolaimanLipi', 'Shonar Bangla', 'Kalpurush', sans-serif;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .sub-steps {
+                flex-direction: column;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+                margin-right: 0;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('bn')">বাংলা</button>
+            </div>
+            <div class="logo">
+                <div class="logo-circle">BSL</div>
+                <div>
+                    <h1 class="en">Basic Shirts Ltd System</h1>
+                    <h1 class="bn">Basic Shirts Ltd System</h1>
+                    <p class="en">User Manual</p>
+                    <p class="bn">ব্যবহারকারী নির্দেশিকা</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Introduction -->
+        <section class="intro">
+            <h2 class="en">Production Management Workflow</h2>
+            <h2 class="bn">Production Management কর্মপ্রবাহ</h2>
+            <p class="en">Follow these steps to manage your production process effectively</p>
+            <p class="bn">আপনার production process কার্যকরভাবে পরিচালনা করতে এই পদক্ষেপগুলি অনুসরণ করুন</p>
+        </section>
+        
+        <!-- Main Workflow -->
+        <section class="workflow">
+            <div class="progress-path"></div>
+            
+            <!-- Step 1: Login -->
+            <div class="step" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="en">Login to the System</h3>
+                    <h3 class="bn">System-এ Login করুন</h3>
+                    <p class="en">Access the system with your credentials</p>
+                    <p class="bn">আপনার credentials দিয়ে system-এ প্রবেশ করুন</p>
+                    <span class="url">URL: http://139.162.34.211:8080/admin_panel</span>
+                </div>
+                <div class="tooltip">?
+                    <div class="tooltip-content">
+                        <strong class="en">Tip:</strong>
+                        <strong class="bn">পরামর্শ:</strong>
+                        <span class="en">Make sure you're using the correct username and password.</span>
+                        <span class="bn">সঠিক username এবং password ব্যবহার করছেন তা নিশ্চিত করুন।</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Create Buyer -->
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="en">Create Buyer</h3>
+                    <h3 class="bn">Buyer তৈরি করুন</h3>
+                    <p class="en">Enter buyer details: name, email, and contact information</p>
+                    <p class="bn">Buyer-এর বিবরণ দিন: name, email, এবং contact information</p>
+                    <span class="url">URL: http://139.162.34.211:8080/admin_panel/buyers</span>
+                </div>
+                <div class="tooltip">?
+                    <div class="tooltip-content">
+                        <strong class="en">Important:</strong>
+                        <strong class="bn">গুরুত্বপূর্ণ:</strong>
+                        <span class="en">Make sure all contact information is accurate and complete for communication purposes.</span>
+                        <span class="bn">যোগাযোগের জন্য সমস্ত contact information সঠিক এবং সম্পূর্ণ তা নিশ্চিত করুন।</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Create Order -->
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="en">Create Order Confirmation Sheet</h3>
+                    <h3 class="bn">Order Confirmation Sheet তৈরি করুন</h3>
+                    <p class="en">Create an order for a buyer and set status to "In Production"</p>
+                    <p class="bn">একজন buyer-এর জন্য order তৈরি করুন এবং status "In Production" সেট করুন</p>
+                    <span class="url">URL: http://139.162.34.211:8080/admin_panel/orders</span>
+                </div>
+                <div class="tooltip">?
+                    <div class="tooltip-content">
+                        <strong class="en">Remember:</strong>
+                        <strong class="bn">মনে রাখবেন:</strong>
+                        <span class="en">The order must be set to "In Production" status before planning can begin.</span>
+                        <span class="bn">Planning শুরু করার আগে order-এর status "In Production" সেট করতে হবে।</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- For Planners Section -->
+            <div class="role-section">
+                <h2 class="en">For Production Planners</h2>
+                <h2 class="bn">Production Planners-দের জন্য</h2>
+            </div>
+            
+            <!-- Sub-steps for Planners -->
+            <div class="sub-steps">
+                <!-- Step 4: Add Plan -->
+                <div class="sub-step" id="step4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="en">Add Monthly Plan</h3>
+                        <h3 class="bn">Monthly Plan যোগ করুন</h3>
+                        <p class="en">Create production plan for the next month</p>
+                        <p class="bn">পরবর্তী মাসের জন্য production plan তৈরি করুন</p>
+                        <span class="url">URL: /planning/add_plan</span>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Publish Plan -->
+                <div class="sub-step" id="step5">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="en">Publish Plan</h3>
+                        <h3 class="bn">Plan Publish করুন</h3>
+                        <p class="en">Makes plan visible in Planning Gantt Chart</p>
+                        <p class="bn">Planning Gantt Chart-এ plan দৃশ্যমান করে</p>
+                        <span class="url">URL: /planning</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Planning Gantt Chart Feature -->
+            <div class="feature-box">
+                <h4 class="en">Planning Gantt Chart</h4>
+                <h4 class="bn">Planning Gantt Chart</h4>
+                <p class="en">The Planning Gantt Chart provides a visual timeline of all production activities. You can view scheduled production for each order, track progress, and identify potential bottlenecks.</p>
+                <p class="bn">Planning Gantt Chart সমস্ত production activities-এর একটি visual timeline প্রদান করে। আপনি প্রতিটি order-এর জন্য scheduled production দেখতে পারেন, progress track করতে পারেন এবং সম্ভাব্য bottlenecks চিহ্নিত করতে পারেন।</p>
+                <ul class="en">
+                    <li>View all scheduled production on a timeline</li>
+                    <li>Color-coded status indicators for quick reference</li>
+                    <li>Filter view by floor, order, or date range</li>
+                </ul>
+                <ul class="bn">
+                    <li>Timeline-এ সমস্ত scheduled production দেখুন</li>
+                    <li>দ্রুত reference-এর জন্য color-coded status indicators</li>
+                    <li>Floor, order, বা date range দ্বারা view filter করুন</li>
+                </ul>
+                <span class="url">URL: http://139.162.34.211:8080/admin_panel/planning</span>
+            </div>
+            
+            <!-- Replan Feature -->
+            <div class="replan-note">
+                <h4 class="en">Replan Feature</h4>
+                <h4 class="bn">Replan Feature</h4>
+                <p class="en">The Replan feature allows planners to adjust production schedules when changes occur. After modifying the plan, remember to click the "Publish" button to make your changes visible.</p>
+                <p class="bn">Replan feature planners-দের পরিবর্তন ঘটলে production schedules সামঞ্জস্য করতে দেয়। Plan পরিবর্তন করার পরে, আপনার পরিবর্তনগুলি দৃশ্যমান করতে "Publish" বোতাম ক্লিক করতে ভুলবেন না।</p>
+                <ul class="en">
+                    <li>Modify existing production schedules</li>
+                    <li>Adjust timelines for delays or expedited orders</li>
+                    <li>Reallocate resources between production lines</li>
+                    <li>Changes are automatically reflected in the Hourly Production Sheet</li>
+                </ul>
+                <ul class="bn">
+                    <li>বিদ্যমান production schedules পরিবর্তন করুন</li>
+                    <li>Delays বা expedited orders-এর জন্য timelines সামঞ্জস্য করুন</li>
+                    <li>Production lines-এর মধ্যে resources পুনরায় বরাদ্দ করুন</li>
+                    <li>পরিবর্তনগুলি স্বয়ংক্রিয়ভাবে Hourly Production Sheet-এ প্রতিফলিত হয়</li>
+                </ul>
+                <span class="url">URL: http://139.162.34.211:8080/admin_panel/planning/replan</span>
+            </div>
+            
+            <!-- For Production Managers Section -->
+            <div class="role-section">
+                <h2 class="en">For Production Line Managers</h2>
+                <h2 class="bn">Production Line Managers-দের জন্য</h2>
+            </div>
+            
+            <!-- Sub-steps for Production Managers -->
+            <div class="sub-steps">
+                <!-- Step 6: Add Production Data -->
+                <div class="sub-step" id="step6">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3 class="en">Add Hourly Production</h3>
+                        <h3 class="bn">Hourly Production যোগ করুন</h3>
+                        <p class="en">Record hourly production data based on the plan</p>
+                        <p class="bn">Plan-এর উপর ভিত্তি করে hourly production data রেকর্ড করুন</p>
+                        <span class="url">URL: /production/add_production</span>
+                    </div>
+                </div>
+                
+                <!-- View Reports -->
+                <div class="sub-step" style="background-color: #ffebee;">
+                    <div class="step-content">
+                        <h3 class="en">View Reports & Dashboard</h3>
+                        <h3 class="bn">Reports & Dashboard দেখুন</h3>
+                        <p class="en">Monitor production progress and performance</p>
+                        <p class="bn">Production progress এবং performance মনিটর করুন</p>
+                        <span class="url">URLs: /production/hourly-report, /admin_panel</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p class="en">Basic Shirts Ltd System - Follow this workflow for efficient production management</p>
+            <p class="bn">Basic Shirts Ltd System - দক্ষ production management-এর জন্য এই workflow অনুসরণ করুন</p>
+        </footer>
+    </div>
+
+    <script>
+        // Language switcher
+        function switchLanguage(lang) {
+            const enElements = document.querySelectorAll('.en');
+            const bnElements = document.querySelectorAll('.bn');
+            const enButton = document.querySelector('.language-btn:first-child');
+            const bnButton = document.querySelector('.language-btn:last-child');
+            
+            if (lang === 'en') {
+                enElements.forEach(el => el.style.display = 'block');
+                bnElements.forEach(el => el.style.display = 'none');
+                enButton.classList.add('active');
+                bnButton.classList.remove('active');
+            } else {
+                enElements.forEach(el => el.style.display = 'none');
+                bnElements.forEach(el => el.style.display = 'block');
+                enButton.classList.remove('active');
+                bnButton.classList.add('active');
+            }
+        }
+        
+        // Initialize English as default
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('en');
+            
+            // Animate steps on scroll
+            const steps = document.querySelectorAll('.step, .sub-step');
+            
+            // Add initial hidden class
+            steps.forEach(step => {
+                step.style.opacity = "0";
+                step.style.transform = "translateY(20px)";
+                step.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            });
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Function to handle scroll animation
+            function handleScroll() {
+                steps.forEach(step => {
+                    if (isInViewport(step) && step.style.opacity === "0") {
+                        setTimeout(() => {
+                            step.style.opacity = "1";
+                            step.style.transform = "translateY(0)";
+                        }, 100);
+                    }
+                });
+            }
+            
+            // Initial check for elements in viewport
+            handleScroll();
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScroll);
+            
+            // Add active class to step when clicked
+            steps.forEach(step => {
+                step.addEventListener('click', () => {
+                    // Remove active class from all steps
+                    steps.forEach(s => s.classList.remove('active'));
+                    // Add active class to clicked step
+                    step.classList.add('active');
+                    step.style.borderLeftColor = '#2196F3';
+                    
+                    // Reset after timeout
+                    setTimeout(() => {
+                        step.style.borderLeftColor = '#d32f2f';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
